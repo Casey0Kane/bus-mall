@@ -1,4 +1,41 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <title>BusMall</title>
+  </head>
+  <body>
+    <h3>Thank you for taking our survey!</h3>
+    <h2>Please click on the item you find most appealing.</h2>
+    <section class="productContainer">
+      <section id="displayLeft">
 
+      </section>
+      <section id="displayCenter">
+
+      </section>
+      <section id="displayRight">
+
+      </section>
+    </section>
+    <button id ="resultsButton" type="button">
+      Display Results
+    </button>
+
+    <button id="clearLS" type="button" onClick="window.location.reload()">
+      Clear and Restart
+    </button>
+
+    <section id="resultsDisplay">
+    </section>
+    <section id="chartsContainer">
+      <canvas id="rawResultsChart" width="750" height="500"></canvas>
+      <canvas id="percentResultsChart" width="750" height="500"></canvas>
+    </section>
+    <script type="text/javascript" src="app.js">
+
+    </script>
+  </body>
 </html>
