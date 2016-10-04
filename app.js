@@ -32,12 +32,12 @@ var allProducts = [new Product('bag', 'bag.jpg'),
                   new Product('wine-glass', 'wine-glass.jpg')];
 var alreadyDisplayed = [];
 
-var chartData = localStorage.getItem('dataPersist');
-if (chartData) {
-  allProducts = JSON.parse(chartData);
-} else {
-  localStorage.setItem('dataPersist', JSON.stringify(allProducts));
-}
+// var chartData = localStorage.getItem('dataPersist');
+// if (chartData) {
+//   allProducts = JSON.parse(chartData);
+// } else {
+//   localStorage.setItem('dataPersist', JSON.stringify(allProducts));
+// }
 
 var displayedProductLeft, displayedProductCenter, displayedProductRight;
 var displayLeft = document.getElementById('displayLeft');
