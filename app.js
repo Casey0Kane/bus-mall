@@ -1,165 +1,146 @@
 'use strict';
 
-function Product(productName, filePath) {
-  this.productName = productName;
-  this.filePath = filePath;
-  this.timesClicked = 0;
+var itemsArray = [];
+var count = 0;
+var selectionDisplay = document.getElementById('selectionDisplay');
+var choices = document.getElementById('choices');
+var results = document.getElementById('results');
+var complete = document.getElementById('complete');
+
+new BusMallItem('img/banana.jpg', 'Banana Slicer', 'banana');
+new BusMallItem('img/bathroom.jpg', 'Bathroom Device Stand', 'bathroom' );
+new BusMallItem('img/boots.jpg', 'Toeless Rain Boots', 'boots' );
+new BusMallItem('img/breakfast.jpg', 'Toaster Pan Pot', 'breakfast' );
+new BusMallItem('img/bubblegum.jpg', 'Meatball BubbleGum', 'bubblegum' );
+new BusMallItem('img/chair.jpg', 'Uncomfortable Chair', 'chair' );
+new BusMallItem('img/cthulhu.jpg', 'Cthulhu', 'cthulhu' );
+new BusMallItem('img/dog-duck.jpg', 'Dog Duck Beak', 'dog-duck' );
+new BusMallItem('img/dragon.jpg', 'Dragon Meat', 'dragon' );
+new BusMallItem('img/pen.jpg', 'Pen Cap Utensils', 'pen' );
+new BusMallItem('img/pet-sweep.jpg', 'Pet Sweep Slippers', 'pet-sweep' );
+new BusMallItem('img/scissors.jpg', 'Pizza Scissors', 'scissors' );
+new BusMallItem('img/shark.jpg', 'Shark Sleeping Bag', 'shark' );
+new BusMallItem('img/sweep.jpg', 'Baby Sweeper', 'sweep' );
+new BusMallItem('img/tauntaun.jpg', 'Tauntaun Sleeping Bag', 'tauntaun' );
+new BusMallItem('img/unicorn.jpg', 'Unicorn Meat', 'unicorn' );
+new BusMallItem('img/usb.jpg', 'Tentical USB', 'usb' );
+new BusMallItem('img/water-can.jpg', 'Self Filling Water Can', 'water-can' );
+new BusMallItem('img/wine-glass.jpg', 'Useless Wineglass', 'wine-glass' );
+console.log(itemsArray);
+
+function BusMallItem(imgSrc, displayName, name){
+  this.imageSource = imgSrc;
+  this.displayName = displayName;
+  this.name = name;
   this.timesDisplayed = 0;
-}
-Product.prototype.findPercentClicked = function() {
-  return (this.timesClicked / this.timesDisplayed).toFixed(2) * 100;
-};
-var totalClicks = 0;
-var allProducts = [new Product('bag', 'bag.jpg'),
-                  new Product('banana', 'banana.jpg'),
-                  new Product('boots', 'boots.jpg'),
-                  new Product('bathroom', 'bathroom.jpg'),
-                  new Product('breakfast', 'breakfast.jpg'),
-                  new Product('bubblegum', 'bubblegum.jpg'),
-                  new Product('chair', 'chair.jpg'),
-                  new Product('cthulu', 'cthulhu.jpg'),
-                  new Product('dog-duck', 'dog-duck.jpg'),
-                  new Product('dragon', 'dragon.jpg'),
-                  new Product('pen', 'pen.jpg'),
-                  new Product('scissors', 'scissors.jpg'),
-                  new Product('pet-sweep', 'pet-sweep.jpg'),
-                  new Product('shark', 'shark.jpg'),
-                  new Product('sweep', 'sweep.jpg'),
-                  new Product('tuantuan', 'tuantuan.jpg'),
-                  new Product('unicorn', 'unicorn.jpg'),
-                  new Product('usb', 'usb.jpg'),
-                  new Product('water-can', 'water-can.jpg'),
-                  new Product('wine-glass', 'wine-glass.jpg')];
-var alreadyDisplayed = [];
+  this.timesClicked = 0;
+  this.recentlyUsed = false;
 
-// var chartData = localStorage.getItem('dataPersist');
-// if (chartData) {
-//   allProducts = JSON.parse(chartData);
-// } else {
-//   localStorage.setItem('dataPersist', JSON.stringify(allProducts));
-// }
-
-var displayedProductLeft, displayedProductCenter, displayedProductRight;
-var displayLeft = document.getElementById('displayLeft');
-var displayCenter = document.getElementById('displayCenter');
-var displayRight = document.getElementById('displayRight');
-
-function displayProduct () {
-  displayedProductLeft = Math.floor(Math.random() * allProducts.length);
-  displayLeft.innerHTML = '<img src = "img/' + allProducts[displayedProductLeft].filePath + '">';
-
-  displayedProductCenter = Math.floor(Math.random() * allProducts.length);
-  while (displayedProductCenter === displayedProductLeft) {
-    displayedProductCenter = Math.floor(Math.random() * allProducts.length);
-  }
-  displayCenter.innerHTML = '<img src = "img/' + allProducts[displayedProductCenter].filePath + '">';
-
-  displayedProductRight = Math.floor(Math.random() * allProducts.length);
-  while (displayedProductRight === displayedProductLeft || displayedProductRight === displayedProductCenter) {
-    displayedProductRight = Math.floor(Math.random() * allProducts.length);
-  }
-  displayRight.innerHTML = '<img src = "img/' + allProducts[displayedProductRight].filePath + '">';
-}
-
-displayProduct();
-
-displayLeft.addEventListener('click', handleClickLeft);
-displayCenter.addEventListener('click', handleClickCenter);
-displayRight.addEventListener('click', handleClickRight);
-
-
-function genericClickMethods() {
-  console.log(event);
-  totalClicks += 1;
-  allProducts[displayedProductLeft].timesDisplayed += 1;
-  allProducts[displayedProductCenter].timesDisplayed += 1;
-  allProducts[displayedProductRight].timesDisplayed += 1;
-  if (alreadyDisplayed.indexOf(displayedProductLeft) === -1) {
-    alreadyDisplayed.push(displayedProductLeft);
-  }
-  if (alreadyDisplayed.indexOf(displayedProductCenter) === -1) {
-    alreadyDisplayed.push(displayedProductCenter);
-  }
-  if (alreadyDisplayed.indexOf(displayedProductRight) === -1) {
-    alreadyDisplayed.push(displayedProductRight);
-  }
-  checkForButton();
-  displayProduct();
-  localStorage.setItem('dataPersist', JSON.stringify(allProducts));
-}
-function handleClickLeft(event) {
-  allProducts[displayedProductLeft].timesClicked += 1;
-  genericClickMethods();
-}
-
-function handleClickCenter(event) {
-  allProducts[displayedProductCenter].timesClicked += 1;
-  genericClickMethods();
-}
-
-function handleClickRight(event) {
-  allProducts[displayedProductRight].timesClicked += 1;
-  genericClickMethods();
-}
-
-var resultsButton = document.getElementById('resultsButton');
-checkForButton();
-function checkForButton () {
-  if (totalClicks < 25) {
-    console.log('totalClicks is: ' + totalClicks);
-    resultsButton.style.display = 'none';
-  }
-  else {
-    resultsButton.style.display = 'block';
-  }
-}
-
-resultsButton.addEventListener('click', handleButtonClick);
-
-var clearLS = document.getElementById('clearLS');
-var handleLSClear = function() {
-  console.log('Clearing Local Storage');
-  localStorage.clear();
-};
-
-clearLS.addEventListener('click', handleLSClear);
-
-function renderList() {
-  resultsDisplay.textContent = '';
-  var errorMessage = document.createElement('p');
-  errorMessage.textContent = 'You can click "Display Updated Results" to render this in a chart once all ' + allProducts.length + ' products have been displayed at least once (you will have to click an item one last time once your final item appears before updating as well). Thus far, ' + alreadyDisplayed.length + ' products have been displayed.';
-  resultsDisplay.appendChild(errorMessage);
-  var displayList = document.createElement('ul');
-  for (var i = 0; i < allProducts.length; i++) {
-    allProducts[i].findPercentClicked();
-    var productResults = document.createElement('li');
-    productResults.textContent = allProducts[i].productName + ' has receieved ' + allProducts[i].timesClicked + ' clicks after being displayed ' + allProducts[i].timesDisplayed + ' times, for a ' + allProducts[i].findPercentClicked() + '% selection rate';
-    displayList.appendChild(productResults);
-  }
-  resultsDisplay.appendChild(displayList);
-}
-
-function createRawClicksChart() {
-  var rawBarData = {
-    labels : [],
-    datasets : [
-      {
-        fillColor : '#B1FFFF',
-        strokeColor : 'black',
-        data : []
-      },
-      {
-        fillColor: '#0E00C4',
-        strokeColor: 'black',
-        data: []
-      }
-    ]
+  this.displayItem = function(){
+    var lineElement = document.createElement('li');
+    var imageElement = document.createElement('img');
+    imageElement.src = this.imageSource;
+    imageElement.alt = this.name;
+    lineElement.appendChild(imageElement);
+    choices.appendChild(lineElement);
   };
-  for (var i = 0; i < allProducts.length; i++) {
-    rawBarData.labels.push(allProducts[i].productName);
-    rawBarData.datasets[0].data.push(allProducts[i].timesClicked);
-    rawBarData.datasets[1].data.push(allProducts[i].timesDisplayed);
-  }
-  var rawResults = document.getElementById('rawResultsChart').getContext('2d');
-  new Chart(rawResults).bar(rawBarData);
+  itemsArray.push(this);
 }
+
+function getThreeItems(){
+  var threeItemArray = [];
+  var indexArray = [];
+  var validItem = true;
+  while(threeItemArray.length != 3){
+    var item = itemsArray[Math.floor(Math.random() * itemsArray.length)];
+    for (var i = 0; i < threeItemArray.length; i++){
+      if (threeItemArray[i].name === item.name){
+        console.log('Duplicate picture prevented ' + item.name);
+        validItem = false;
+      }
+    }
+    if (validItem && item.recentlyUsed !== true){
+      indexArray.push(findIndexByName(item.name));
+      threeItemArray.push(item);
+      item.timesDisplayed += 1;
+    }
+    else {
+      console.log('Did not add ' + item.name);
+      validItem = true;
+    }
+  }
+  clearRecentlyUsed();
+  itemsArray[indexArray[0]].recentlyUsed = true;
+  itemsArray[indexArray[1]].recentlyUsed = true;
+  itemsArray[indexArray[2]].recentlyUsed = true;
+  return threeItemArray;
+}
+
+function findIndexByName(name){
+  for (var i = 0; i < itemsArray.length; i++){
+    if (itemsArray[i].name === name){
+      return i;
+    }
+  }
+  return -1;
+}
+
+function clearRecentlyUsed(){
+  for (var i = 0; i < itemsArray.length; i++){
+    itemsArray[i].recentlyUsed = false;
+  }
+}
+
+function displayThreeItems(){
+  choices.innerHTML = '';
+  var threeItems = getThreeItems();
+  for (var i = 0; i < 3; i++){
+    threeItems[i].displayItem();
+  }
+}
+function runMain(){
+  displayThreeItems();
+}
+
+function handleClickEvent(event){
+  if(event.target.alt === undefined){//eslint-disable-line
+    console.log('Invalid Click Response');
+    return alert('You must Click on an Image!');
+  }
+
+  var choice = event.target.alt;
+  for (var i = 0; i < itemsArray.length; i++){
+    if(itemsArray[i].name === choice){
+      itemsArray[i].timesClicked += 1;
+    }
+  }
+  displayThreeItems();
+  count++;
+  if (count === 25){
+    removeListenerAndUpdate();
+  }
+}
+
+function removeListenerAndUpdate(){
+  selectionDisplay.removeEventListener('click',handleClickEvent);
+  complete.textContent = 'See Results';
+}
+
+function displayResults(){
+  results.innerHTML = '';
+  for (var i = 0; i < itemsArray.length; i++){
+    var lineElement = document.createElement('li');
+    lineElement.setAttribute('class', 'disp');
+    lineElement.textContent = itemsArray[i].name + ': Clicked/Displayed - ' + itemsArray[i].timesClicked + '/' + itemsArray[i].timesDisplayed;
+    results.appendChild(lineElement);
+  }
+}
+
+selectionDisplay.addEventListener('click', handleClickEvent);
+complete.addEventListener('click',displayResults);
+
+
+runMain();
+
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
