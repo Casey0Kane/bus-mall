@@ -32,12 +32,10 @@ var allProducts = [new Product('bag', 'bag.jpg'),
                   new Product('wine-glass', 'wine-glass.jpg')];
 var alreadyDisplayed = [];
 
-
 var chartData = localStorage.getItem('dataPersist');
 if (chartData) {
   allProducts = JSON.parse(chartData);
 } else {
-  console.log('Local storage empty! Initializing!');
   localStorage.setItem('dataPersist', JSON.stringify(allProducts));
 }
 
@@ -64,7 +62,6 @@ function displayProduct () {
 }
 
 displayProduct();
-
 
 displayLeft.addEventListener('click', handleClickLeft);
 displayCenter.addEventListener('click', handleClickCenter);
@@ -117,10 +114,7 @@ function checkForButton () {
   }
 }
 
-//event listener and handler for button
 resultsButton.addEventListener('click', handleButtonClick);
-
-//Clear LS button
 
 var clearLS = document.getElementById('clearLS');
 var handleLSClear = function() {
