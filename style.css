@@ -1,7 +1,7 @@
 *{
   margin: 0;
   padding: 0;
-  
+
 }
 
 img{
@@ -15,6 +15,7 @@ img{
 }
 ul{
   margin: 0 auto;
+  display: inline-block;
 }
 
 li{
@@ -23,7 +24,8 @@ li{
   height: 300px;
   display: inline-block;
   border: 4px solid black;
-  margin: 15px;
+  border-radius: 10px;
+  margin: 10px;
 }
 
 .disp{
@@ -31,4 +33,12 @@ li{
   display: block;
   width: auto;
   height: auto;
+}
+
+h1 {
+  text-align: center;
+  border: solid 2px cyan;
+  border-radius: 15px;
+  color: #000;
+  background: lightgray;
 }
