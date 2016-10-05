@@ -106,7 +106,7 @@ function runMain(){
 function handleClickEvent(event){
   if(event.target.alt === undefined){//eslint-disable-line
     console.log('Invalid click response');
-    return alert('You must click on an image!');
+    return alert('You must click on an image');
   }
 
   var choice = event.target.alt;
@@ -132,7 +132,7 @@ function displayResults(){
   for (var i = 0; i < itemsArray.length; i++){
     var lineElement = document.createElement('li');
     lineElement.setAttribute('class', 'disp');
-    lineElement.textContent = itemsArray[i].name + ': Clicked/Displayed - ' + itemsArray[i].timesClicked + '/' + itemsArray[i].timesDisplayed;
+    lineElement.textContent = itemsArray[i].name + ': Clicked - ' + itemsArray[i].timesClicked + '/' + itemsArray[i].timesDisplayed;
     results.appendChild(lineElement);
   }
   prepareLabelsAndData();
@@ -149,7 +149,6 @@ function prepareLabelsAndData(){
     labelArray[i] = labelArray[i].charAt(0).toUpperCase() + labelArray[i].slice(1);
     dataArray[i] = itemsArray[i].timesClicked;
   }
-  console.log(labelArray + ' ' + dataArray);
 }
 
 var data = {
@@ -167,6 +166,7 @@ function drawChart() {
   var voteChart = new Chart(chartData,{
     type: 'bar',
     data: data,
+    text: 'hi',
     options: {responsive: false},
     scales: [{ticks:{ beginAtZero:true}}] });
   console.log(voteChart);
