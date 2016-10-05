@@ -164,9 +164,11 @@ var data = {
 
 function drawChart() {
   var voteChart = new Chart(chartData,{
+    title: {
+      text: 'Choices chart'
+    },
     type: 'bar',
     data: data,
-    text: 'hi',
     options: {responsive: false},
     scales: [{ticks:{ beginAtZero:true}}] });
   console.log(voteChart);
