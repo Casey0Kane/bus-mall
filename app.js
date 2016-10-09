@@ -13,7 +13,7 @@ var chartData = document.getElementById('displayCharts');
 if (localStorage.getItem('itemsArray')){
   retrieveLS();
 } else {
-  console.log('It doesn\'t exit');
+  console.log('It doesn\'t exist');
   //else it makes all new BusMallItem
   new BusMallItem('img/banana.jpg', 'Banana Slicer', 'banana');
   new BusMallItem('img/bathroom.jpg', 'Bathroom', 'bathroom' );

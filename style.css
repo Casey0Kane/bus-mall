@@ -11,6 +11,7 @@ img{
   min-height: 240px;
   position: absolute;
   margin: auto;
+  cursor: pointer;
 }
 ul{
   margin: 0 auto;
